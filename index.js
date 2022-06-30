@@ -36,17 +36,11 @@ async function run () {
             res.send(data);
         })
 
-
-
-
-
     }
     finally {
 
     }
 }
-
-
 
 
 run().catch(console.dir);
