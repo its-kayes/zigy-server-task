@@ -1,4 +1,4 @@
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const express = require('express');
 const cors = require('cors');
 require('dotenv').config();
@@ -24,9 +24,16 @@ async function run () {
             res.send(result);
         })
 
-        app.get("/user", async(req, res)=> {
+        app.get("/users", async(req, res)=> {
             let data = await userCollection.find().toArray();
             res.send(data)
+        })
+
+        app.delete('/deleteUser/:id', async(req, res) => {
+            let id = req.params.id;
+            let query = { _id: ObjectId(id) }
+            let data = await userCollection.deleteOne(query);
+            res.send(data);
         })
 
 
